@@ -24,7 +24,7 @@ jobs:
         id: build-image
         uses: redhat-actions/buildah-build@v2
         with:
-          image: kameshsampath/fruits-app-ui}
+          image: ${{ secrets.GHCR_USERNAME }}/fruits-app-ui
           tags: latest ${{ github.sha }}
           dockerfiles: |
             ./Dockerfile
