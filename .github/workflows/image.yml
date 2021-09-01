@@ -15,7 +15,7 @@ jobs:
       - name: Log in to ${{ env.CONTAINER_REGISTRY}} Registry
         uses: redhat-actions/podman-login@v1
         with:
-          registry: ghcr.io
+          registry: ${{ env.CONTAINER_REGISTRY }}
           username: ${{ secrets.GHCR_USERNAME }}
           password: ${{ secrets.GHCR_PAT }}
 
