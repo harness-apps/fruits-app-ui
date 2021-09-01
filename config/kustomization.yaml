@@ -9,8 +9,8 @@ commonLabels:
 
 configMapGenerator:
   - name: ui-config
-    literals:
-      - "FRUITS_API_URI=http://fruits-api:8080/v1/api"
+    files:
+      - .env
 resources:
 - deployment.yaml
 - service.yaml

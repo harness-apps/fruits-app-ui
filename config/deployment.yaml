@@ -15,6 +15,9 @@ spec:
         - name: ui-config
           configMap:
             name: ui-config
+            items:
+              - key: .env
+                path: .env
       containers:
       - name: fruits-app-ui
         image: ghcr.io/kameshsampath/fruits-app-ui
@@ -25,5 +28,6 @@ spec:
         ports:
         - containerPort: 3000
         volumeMounts:
-          - mountPath: /app/.env.local
+          - mountPath: /app/.env
             name: ui-config
+            subPath: .env
