@@ -23,6 +23,10 @@ ENV NODE_ENV production
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
 
+RUN apk update \
+   && apk add ca-certificates \
+   && rm -rf /var/cache/apk/*
+
 # You only need to copy next.config.js if you are NOT using the default configuration
 # COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public

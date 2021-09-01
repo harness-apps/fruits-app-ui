@@ -11,6 +11,7 @@ spec:
       labels:
         app: fruits-app-ui
     spec:
+      serviceAccountName: fruits-app-ui
       volumes:
         - name: ui-config
           configMap:
@@ -31,3 +32,4 @@ spec:
           - mountPath: /app/.env
             name: ui-config
             subPath: .env
+

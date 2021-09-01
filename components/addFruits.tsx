@@ -24,12 +24,12 @@ export interface AddFruitsProps {
 const AddFruit:NextPage<AddFruitsProps> = ({refreshFn}) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
+
   const { register, handleSubmit, formState: { errors } } = useForm();
   const toast = useToast( );
 
   const onSubmit = async (data: Fruit) => {
-    console.log(`Submitting data ${JSON.stringify(data)}`);
+    //console.log(`Submitting data ${JSON.stringify(data)}`);
     const reqOptions = {
       body: JSON.stringify(data),
       headers: {
@@ -39,8 +39,8 @@ const AddFruit:NextPage<AddFruitsProps> = ({refreshFn}) => {
     };
 
     const res = await fetch("/api/fruits/save",reqOptions);
-    
-    
+
+
     if (res.status < 300 ){
       toast({
         title: `Fruit ${data.name} saved!`,
@@ -84,7 +84,7 @@ const AddFruit:NextPage<AddFruitsProps> = ({refreshFn}) => {
       />
       <Modal
         isOpen={isOpen}
-        onClose={onClose} 
+        onClose={onClose}
         isCentered={true}
       >
         <ModalOverlay />

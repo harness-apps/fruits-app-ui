@@ -12,5 +12,6 @@ configMapGenerator:
     files:
       - .env
 resources:
+- sa.yaml
 - deployment.yaml
 - service.yaml
