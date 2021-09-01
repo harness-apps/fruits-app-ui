@@ -1,6 +1,16 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Fruits UI
 
-## Getting Started
+The UI for the [fruits-app](https://github.com/kameshsampath/gloo-fruits-app). The UI is built using [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and [Chakra UI](https://chakra-ui.com).
+
+## Kubernetes Deployment
+
+Assuming you have kubernetes cluster and wish to get it deployed there,
+
+```bash
+kubectl apply -k "github.com/kameshsampath/fruits-app-ui" 
+```
+
+## Run Locally
 
 First, run the development server:
 
@@ -23,9 +33,7 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [Learn Chakra](https://chakra-ui.com/docs/getting-started) - learn about Chakra UI
 
 ## Deploy on Vercel
 
