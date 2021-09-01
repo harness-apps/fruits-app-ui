@@ -8,5 +8,5 @@ configMapGenerator:
     literals:
       - "FRUITS_API_URI=http://fruits-api:8080/v1/api"
 resources:
-- dpeloyment.yaml
+- deployment.yaml
 - service.yaml
