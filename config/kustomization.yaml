@@ -1,0 +1,12 @@
+namespace: fruits-app
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+  - name: ui-config
+    literals:
+      - "FRUITS_API_URI=http://fruits-api:8080/v1/api"
+resources:
+- dpeloyment.yaml
+- service.yaml
