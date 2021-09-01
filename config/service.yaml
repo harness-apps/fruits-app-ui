@@ -4,7 +4,8 @@ metadata:
   name: fruits-app-ui
 spec:
   selector:
-    app: myapp
+    app: fruits-app-ui
   ports:
   - port: 8080
     targetPort: 3000
+  type: NodePort

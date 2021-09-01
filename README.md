@@ -7,7 +7,7 @@ The UI for the [fruits-app](https://github.com/kameshsampath/gloo-fruits-app). T
 Assuming you have kubernetes cluster and wish to get it deployed there,
 
 ```bash
-kubectl apply -k "github.com/kameshsampath/fruits-app-ui" 
+kubectl apply -k "github.com/kameshsampath/fruits-app-ui/config" 
 ```
 
 ## Run Locally

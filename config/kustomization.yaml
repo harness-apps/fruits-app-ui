@@ -3,6 +3,10 @@ namespace: fruits-app
 generatorOptions:
   disableNameSuffixHash: true
 
+commonLabels:
+  app: fruits-app-ui
+  version: v1.0
+
 configMapGenerator:
   - name: ui-config
     literals:
