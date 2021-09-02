@@ -20,7 +20,7 @@ jobs:
           password: ${{ secrets.GHCR_PAT }}
 
 
-      - name: Build Site Image
+      - name: Build Image
         id: build-image
         uses: redhat-actions/buildah-build@v2
         with:

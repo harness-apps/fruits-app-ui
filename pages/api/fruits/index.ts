@@ -11,8 +11,8 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse):P
       err: extRes.statusText,
       errorCode: extRes.status
     });
-  }  
-  console.log(`URI:${uri} response ${JSON.stringify(fruits)}`);
+  }
+  //console.log(`URI:${uri} response ${JSON.stringify(fruits)}`);
   res.status(extRes.status).json({
     fruits,
     err: "",

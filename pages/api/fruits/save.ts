@@ -1,16 +1,18 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function fruitSaveHandler(req:NextApiRequest,res:NextApiResponse){
+export default async function fruitSaveHandler(req:NextApiRequest,res:NextApiResponse):Promise<void> {
   const uri = process.env.FRUITS_API_URI ? process.env.FRUITS_API_URI : 'http://localhost:8080/';
 
-  console.log(`Saving ... Fruit ${JSON.stringify(req.body)}`);
   const {
+    body,
     method,
   } = req;
 
+  console.log(`Saving ... Fruit ${JSON.stringify(body)}`);
+
   if (method === "POST"){
     const reqOptions = {
-      body: JSON.stringify(req.body),
+      body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json'
       },

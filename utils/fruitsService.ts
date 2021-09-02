@@ -7,7 +7,7 @@ export function FetchFruits():FruitsData {
 
   const { data,error } = useSwr("/api/fruits",fetcher);
 
-  console.log(`Data ${JSON.stringify(data)}`);
+  //console.log(`Data ${JSON.stringify(data)}`);
 
   return {
     isLoading: !error && !data,

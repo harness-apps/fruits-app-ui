@@ -1,7 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function fruitsHandler(req:NextApiRequest,res:NextApiResponse){
-  
+export const config = {
+  api: {
+    // disables call to body parsing module while deployed
+    bodyParser: process.env.NODE_ENV !== 'production',
+  }
+};
+
+export default async function fruitsHandler(req:NextApiRequest,res:NextApiResponse): Promise<void>{
+
   const uri = process.env.FRUITS_API_URI ? process.env.FRUITS_API_URI : 'http://localhost:8080/';
 
   const {
@@ -10,7 +17,7 @@ export default async function fruitsHandler(req:NextApiRequest,res:NextApiRespon
   } = req;
 
   if (method === "DELETE"){
-    console.log(`Deleting fruit with id ${id}`);
+    console.log(`Deleting fruit with id ${id} via ${uri}/fruits/${id}`);
     const reqOptions = {
       method: 'DELETE'
     };

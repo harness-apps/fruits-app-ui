@@ -19,7 +19,7 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
-RUN adduser --system -u 1001 --no-create-home nextjs \
+RUN adduser --system -u 1001 nextjs \
    && chown -R 1001:0 /app \
    && chmod -R g+=wrx /app
 
