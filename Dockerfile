@@ -5,18 +5,15 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
-RUN ls -ltra /app-build
+RUN adduser --system --uid 1001 nextjs
 
-RUN addgroup --system  --gid 1001 nodejs \
-   && adduser --system --uid 1001 nextjs \
-   && chown -R 1001:0 /app \
-   && chmod -R g+=wrx /app
-
-RUN mkdir -p .next \
-   && cp -r /app-build/public ./public \
+RUN cp -r /app-build/.next/standalone/. ./ \
+   && cp -r /app-build/public ./ \
    && cp /app-build/package.json ./package.json \
-   && cp -r /app-build/.next/standalone/* ./ \
-   && cp -r /app-build/.next/static ./.next
+   && cp -r /app-build/.next/static ./.next/
+
+RUN chown -R 1001:0 /app \
+   && chmod -R g+=wrx /app
 
 RUN ls -ltra /app
 

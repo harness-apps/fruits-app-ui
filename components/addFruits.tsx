@@ -1,7 +1,7 @@
 import { Button, FormControl, FormLabel, IconButton, Input, ModalOverlay, Select, useDisclosure } from "@chakra-ui/react";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Fruit, FRUIT_SEASON_OPTIONS } from '../utils/constants';
+import { FRUIT_SEASON_OPTIONS } from '../utils/constants';
 import {
   Alert,
   AlertIcon,
@@ -28,7 +28,7 @@ const AddFruit:NextPage<AddFruitsProps> = ({refreshFn}) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const toast = useToast( );
 
-  const onSubmit = async (data: Fruit) => {
+  const onSubmit = async (data: any) => {
     //console.log(`Submitting data ${JSON.stringify(data)}`);
     const reqOptions = {
       body: JSON.stringify(data),
