@@ -9,7 +9,7 @@ export const config = {
 
 export default async function fruitsHandler(req:NextApiRequest,res:NextApiResponse): Promise<void>{
 
-  const uri = process.env.FRUITS_API_URI ? process.env.FRUITS_API_URI : 'http://localhost:8080/';
+  const uri = process.env.FRUITS_API_URI ? process.env.FRUITS_API_URI : 'http://localhost:8080/api';
 
   const {
     query: { id },

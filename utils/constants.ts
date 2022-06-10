@@ -5,7 +5,9 @@ export type FruitsData = {
 }
 
 export interface Props{
-	fruits: Fruit[]
+	fruits: Fruit[],
+  err: string,
+  errorCode: number,
 }
 export type Fruit = {
 	id: number,

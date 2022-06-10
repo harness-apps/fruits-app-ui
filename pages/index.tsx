@@ -8,7 +8,7 @@ const Home: NextPage = () => {
 
   const { fruitsData, isLoading, isError } = FetchFruits();
 
-  //console.log(`Fruits Data : ${JSON.stringify(fruitsData)}`);
+  //console.log(`Fruits Data : ${isError}`);
 
   if (isLoading) {
     return <FruitsLoading />;

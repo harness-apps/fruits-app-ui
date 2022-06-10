@@ -25,8 +25,7 @@ const FruitsList: NextPage<Props> = ({ fruits }) => {
   };
 
   return (
-    <Box>
-      <Stack><AddFruit refreshFn={refreshData} /></Stack>
+    <Box> <Stack><AddFruit refreshFn={refreshData} /></Stack>
       <Table variant="striped" colorScheme="teal">
         <TableCaption>List of Fruits</TableCaption>
         <Thead>
@@ -49,8 +48,7 @@ const FruitsList: NextPage<Props> = ({ fruits }) => {
             })
           }
         </Tbody>
-      </Table>
-    </Box>
+      </Table></Box>
   );
 };
 

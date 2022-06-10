@@ -1,17 +1,25 @@
-import useSwr from 'swr';
+import useSWR from 'swr';
 import { FruitsData } from './constants';
 
 const fetcher = (url:string) => fetch(url).then((res) => res.json());
 
 export function FetchFruits():FruitsData {
 
-  const { data,error } = useSwr("/api/fruits",fetcher);
+  const { data } = useSWR("/api/fruits",fetcher);
 
-  //console.log(`Data ${JSON.stringify(data)}`);
+  //console.log("API Data %s",JSON.stringify(data));
 
-  return {
-    isLoading: !error && !data,
-    fruitsData: data,
-    isError: error
-  };
+  if (!data){
+    return {
+      isLoading: true,
+      fruitsData: null,
+      isError: true
+    };
+  } else {
+    return {
+      isLoading: !data.fruits && !data.err,
+      fruitsData: data,
+      isError: data.err
+    };
+  }
 }

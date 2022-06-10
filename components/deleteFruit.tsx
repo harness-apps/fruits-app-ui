@@ -26,8 +26,8 @@ const DeleteFruit:NextPage<DeleteFruitsProps> = ({fruit,refreshFn}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const handleDelete = async (data:Fruit) =>{
-    console.log(`Deleteing data ${JSON.stringify(data)}`);
-    
+    console.log(`Deleting data ${JSON.stringify(data)}`);
+
     const reqOptions = {
       method: 'DELETE'
     };
@@ -35,7 +35,7 @@ const DeleteFruit:NextPage<DeleteFruitsProps> = ({fruit,refreshFn}) => {
     const res = await fetch(`/api/fruits/${data.id}`,reqOptions);
     onClose();
     refreshFn();
-    
+
     if (res.status === 204){
       toast({
         title: `Fruit ${data.name} deleted!`,
@@ -51,7 +51,7 @@ const DeleteFruit:NextPage<DeleteFruitsProps> = ({fruit,refreshFn}) => {
         duration: 3000
       });
     }
-    
+
   };
 
   return (
@@ -77,8 +77,8 @@ const DeleteFruit:NextPage<DeleteFruitsProps> = ({fruit,refreshFn}) => {
             <p>Do you want to delete the fruit <strong>{`${fruit.name}`}</strong>?</p>
           </ModalBody>
           <ModalFooter>
-            <Button 
-              colorScheme="blue" 
+            <Button
+              colorScheme="blue"
               mr={3}
               onClick={() => handleDelete(fruit)}
             >

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function fruitSaveHandler(req:NextApiRequest,res:NextApiResponse):Promise<void> {
-  const uri = process.env.FRUITS_API_URI ? process.env.FRUITS_API_URI : 'http://localhost:8080/';
+  const uri = process.env.FRUITS_API_URI ? process.env.FRUITS_API_URI : 'http://localhost:8080/api';
 
   const {
     body,
