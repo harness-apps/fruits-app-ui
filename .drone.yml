@@ -17,8 +17,6 @@ trigger:
 steps:
   - name: ui-build
     image: node:17.7-buster
-    environment:
-      FRUITS_API_URI: http://fruits-api.fruits-app.svc.cluster.local:8080/api
     commands:
       - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
       - pnpm install

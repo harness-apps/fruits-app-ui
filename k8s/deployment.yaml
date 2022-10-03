@@ -21,7 +21,7 @@ spec:
                 path: .env
       containers:
       - name: fruits-app-ui
-        image: ghcr.io/kameshsampath/fruits-app-ui
+        image: ${FRUITS_APP_API_IMAGE}
         resources:
           limits:
             memory: "128Mi"
