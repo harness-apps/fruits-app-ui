@@ -1,22 +1,14 @@
 ---
 kind: pipeline
 type: docker
-name: fruits-ui
+name: default
 
 # remove this section if your CPU is amd64
 platform:
   os: linux
   arch: arm64
 
-environment: &buildEnv
-  DESTINATION_IMAGE: "ttl.sh/kameshsampath/fruits-ui:2m"
-  APP_NAMESPACE: fruit-app
-  KUBERNETES_CONTEXT: rancher-desktop
-  DOCKER_FILE: Dockerfile
-  APP_SERVICE_TYPE: LoadBalancer
-
 steps:
-  # TODO enable cache
   - name: yarn-install
     image: docker.io/node:lts-alpine
     commands:
@@ -27,7 +19,6 @@ steps:
       - yarn install --frozen-lockfile
       - cp -r /drone/src/* .
       - yarn build
-    environment: *buildEnv
     volumes:
       - name: app-build-dir
         path: /app-build
@@ -37,9 +28,8 @@ steps:
       - >
         /kaniko/executor
         --context /app-build
-        --dockerfile $DOCKER_FILE
-        --destination $DESTINATION_IMAGE
-    environment: *buildEnv
+        --dockerfile Dockerfile
+        --destination ttl.sh/nextjswithdrone/my-app:1h
     volumes:
       - name: app-build-dir
         path: /app-build

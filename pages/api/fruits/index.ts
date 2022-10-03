@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req:NextApiRequest, res:NextApiResponse):Promise<void> {
-  const uri = process.env.FRUITS_API_URI ? process.env.FRUITS_API_URI : 'http://localhost:8080/api';
+  const uri = process.env.FRUITS_API_URI ? process.env.FRUITS_API_URI : 'http://localhost:8080/api/fruits';
   //TODO handle errors
   const extRes = await fetch(`${uri}/fruits/`).then(res => res);
   const apiResponse = await extRes.json();
