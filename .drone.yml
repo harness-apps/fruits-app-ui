@@ -1,38 +1,69 @@
 ---
 kind: pipeline
 type: docker
-name: default
+name: "Build and Release"
 
-# remove this section if your CPU is amd64
 platform:
   os: linux
-  arch: arm64
+  arch: amd64
+
+trigger:
+  branch:
+    - main
+  event:
+    - tag
+    - push
 
 steps:
-  - name: yarn-install
-    image: docker.io/node:lts-alpine
+  - name: ui-build
+    image: node:17.7-buster
+    environment:
+      FRUITS_API_URI: http://fruits-api.fruits-app.svc.cluster.local:8080/api
     commands:
-      - apk add --no-cache libc6-compat
-      - cd /app-build
-      - cp /drone/src/package.json ./
-      - cp /drone/src/yarn.lock ./
-      - yarn install --frozen-lockfile
-      - cp -r /drone/src/* .
-      - yarn build
-    volumes:
-      - name: app-build-dir
-        path: /app-build
-  - name: build-image
-    image: gcr.io/kaniko-project/executor:debug
-    commands:
-      - >
-        /kaniko/executor
-        --context /app-build
-        --dockerfile Dockerfile
-        --destination ttl.sh/nextjswithdrone/my-app:1h
-    volumes:
-      - name: app-build-dir
-        path: /app-build
-volumes:
-  - name: app-build-dir
-    temp: {}
+      - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
+      - pnpm install
+      - pnpm run clean && pnpm run build
+  - name: Publish Image
+    image: plugins/docker
+    pull: if-not-exists
+    settings:
+      auto_tag: true
+      insecure: true
+      auto_tag_suffix: linux-amd64
+      dockerfile: docker/Dockerfile.linux.amd64
+      registry:
+        from_secret: image_registry
+      repo:
+        from_secret: destination_image
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+---
+kind: pipeline
+type: docker
+name: "Publish Manifest"
+
+depends_on:
+  - "Build and Release"
+
+trigger:
+  branch:
+    - main
+  event:
+    - tag
+    - push
+
+steps:
+  - name: Publish Manifests
+    image: plugins/manifest:1.2
+    settings:
+      auto_tag: true
+      insecure: true
+      ignore_missing: true
+      spec: docker/manifest.tmpl
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+
