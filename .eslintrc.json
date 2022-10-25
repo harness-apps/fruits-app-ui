@@ -7,9 +7,7 @@
   "parserOptions": {
     "sourceType": "module"
   },
-  "plugins": [
-    "@typescript-eslint"
-  ],
+  "plugins": ["@typescript-eslint"],
   "extends": [
     "next/core-web-vitals",
     "eslint:recommended",
@@ -25,9 +23,9 @@
         "classes": false
       }
     ],
-    "@typescript-eslint/no-unused-vars": [
-      1
-    ],
+    "@typescript-eslint/no-unused-vars": [1],
+    "@typescript-eslint/no-explicit-any": ["off"],
+    "@typescript-eslint/explicit-module-boundary-types": ["off"],
     "indent": [
       "error",
       2,
@@ -35,9 +33,7 @@
         "SwitchCase": 1
       }
     ],
-    "eol-last": [
-      "error"
-    ],
+    "eol-last": ["error"],
     "space-infix-ops": [
       "error",
       {
@@ -50,14 +46,8 @@
         "ignoreEOLComments": true
       }
     ],
-    "keyword-spacing": [
-      "error"
-    ],
-    "semi": [
-      "error"
-    ]
+    "keyword-spacing": ["error"],
+    "semi": ["error"]
   },
-  "ignorePatterns": [
-    "gulpfile.js"
-  ]
+  "ignorePatterns": ["gulpfile.js"]
 }

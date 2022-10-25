@@ -4,11 +4,17 @@ type: docker
 name: "default"
 
 steps:
-  ## TODO add a test step
-  - name: ui-build
-    image: node:17.7-buster
+  - name: lint
+    image: kameshsampath/fruits-ui-base
+    pull: if-not-exists
     commands:
-      - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
+      - pnpm install
+      - pnpm lint
+
+  - name: build
+    image:  kameshsampath/fruits-ui-base
+    pull: if-not-exists
+    commands:
       - pnpm install
       - pnpm run clean && pnpm run build
 
@@ -17,6 +23,24 @@ steps:
     privileged: true
     pull: if-not-exists
     settings:
+      platforms:
+        - linux/amd64
+        - linux/arm64
+---
+kind: pipeline
+type: docker
+name: build-base
+
+steps:
+  - name: push
+    image: thegeeklab/drone-docker-buildx
+    privileged: true
+    pull: if-not-exists
+    settings:
+      dockerfile: Dockerfile.pnpm
+      repo: kameshsampath/fruits-ui-base
+      tag:
+        - latest
       platforms:
         - linux/amd64
         - linux/arm64

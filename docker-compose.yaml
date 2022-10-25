@@ -1,0 +1,40 @@
+version: "3.7"
+services:
+  fruits-api:
+    image: "${FRUITS_API_IMAGE}"
+    ports:
+      - "8080:8080"
+    env_file:
+      - .build.env
+  fruits-ui:
+    image: "${PLUGIN_REGISTRY}/${PLUGIN_REPO}:${PLUGIN_TAG}"
+    ports:
+      - "3000:3000"
+    env_file:
+      - .build.env
+    depends_on:
+      - fruits-api
+  # mongodb:
+  #   image: mongo
+  #   ports:
+  #     - "27017:27017"
+  #   env_file:
+  #    - .build.env
+  # postgresql:
+  #   image: postgres:14.4-alpine
+  #   ports:
+  #     - "5432:5432"
+  #   env_file:
+  #     - .env
+  # mysql:
+  #   image: mariadb
+  #   ports:
+  #     - "3306:3306"
+  #   env_file:
+  #     - .build.env
+  # db-adminer:
+  #   image: adminer
+  #   ports:
+  #     - "9090:8080"
+networks:
+  fruits-app:
