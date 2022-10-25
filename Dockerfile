@@ -1,4 +1,4 @@
-FROM --platform=arm64 node:lts-alpine
+FROM  node:lts-alpine
 LABEL org.opencontainers.image.source https://github.com/kameshsampath/fruits-app-ui
 
 WORKDIR /app

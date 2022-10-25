@@ -1,67 +1,22 @@
 ---
 kind: pipeline
 type: docker
-name: "Build and Release"
-
-platform:
-  os: linux
-  arch: amd64
-
-trigger:
-  branch:
-    - main
-  event:
-    - tag
-    - push
+name: "default"
 
 steps:
+  ## TODO add a test step
   - name: ui-build
     image: node:17.7-buster
     commands:
       - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
       - pnpm install
       - pnpm run clean && pnpm run build
-  - name: Publish Image
-    image: plugins/docker
+
+  - name: push
+    image: thegeeklab/drone-docker-buildx
+    privileged: true
     pull: if-not-exists
     settings:
-      auto_tag: true
-      insecure: true
-      auto_tag_suffix: linux-amd64
-      dockerfile: docker/Dockerfile.linux.amd64
-      registry:
-        from_secret: image_registry
-      repo:
-        from_secret: destination_image
-      username:
-        from_secret: docker_username
-      password:
-        from_secret: docker_password
----
-kind: pipeline
-type: docker
-name: "Publish Manifest"
-
-depends_on:
-  - "Build and Release"
-
-trigger:
-  branch:
-    - main
-  event:
-    - tag
-    - push
-
-steps:
-  - name: Publish Manifests
-    image: plugins/manifest:1.2
-    settings:
-      auto_tag: true
-      insecure: true
-      ignore_missing: true
-      spec: docker/manifest.tmpl
-      username:
-        from_secret: docker_username
-      password:
-        from_secret: docker_password
-
+      platforms:
+        - linux/amd64
+        - linux/arm64
