@@ -24,6 +24,10 @@ const FruitsList: NextPage<Props> = ({ fruits }) => {
     mutate("/api/fruits");
   };
 
+  const toInitCaps = (str:string) => {
+    return str[0].toUpperCase() + str.substring(1);
+  };
+
   return (
     <Box> <Stack><AddFruit refreshFn={refreshData} /></Stack>
       <Table variant="striped" colorScheme="teal">
@@ -39,8 +43,8 @@ const FruitsList: NextPage<Props> = ({ fruits }) => {
           {
             fruits.map((fruit: Fruit) => {
               return (<Tr key={fruit.id}>
-                <Td>{fruit.name}</Td>
-                <Td>{fruit.season}</Td>
+                <Td>{toInitCaps(fruit.name)}</Td>
+                <Td>{toInitCaps(fruit.season)}</Td>
                 <td>
                   <DeleteFruit fruit={fruit} refreshFn={refreshData} />
                 </td>
